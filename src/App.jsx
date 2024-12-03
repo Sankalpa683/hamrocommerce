@@ -1,6 +1,7 @@
 import Navbar from './components/navbar'
 import Hero from './components/hero';
 import Products from './components/products';
+import Footer from './components/footer';
 import './App.css'
 import "./index.css";
 
@@ -13,6 +14,9 @@ function App() {
         <Hero />
         <hr />
         <Products />
+        <br />
+        <hr />
+        <Footer />
         <br />
       </main>
     </>
