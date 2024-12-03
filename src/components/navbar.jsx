@@ -1,15 +1,32 @@
 import { React, useState } from 'react'
 import Hamburgermenu from './menu/menu';
+
 import { Button, Input } from '@material-tailwind/react';
-import { Home, Menu, MapPinHouse, DiamondPlus, CircleUser, ChartColumnStacked,  Search, ShoppingBag } from 'lucide-react';
+import {
+  Dialog,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Checkbox,
+} from "@material-tailwind/react";
+import { Home, Menu, MapPinHouse, DiamondPlus, CircleUser, ChartColumnStacked, Search, ShoppingBag } from 'lucide-react';
 
 
 const navbar = () => {
+
+  // use state hook for drawer (menu hamburger navigation)
 
   const [open, setOpen] = useState(false);
 
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
+
+  // use state hook for dialog box of profile page 
+
+  const [dopen, setdopen] = useState(false);
+  const handleOpen = () => setdopen((cur) => !cur);
 
   return (
     <>
@@ -54,7 +71,7 @@ const navbar = () => {
           </div>
           {/* center sections */}
           <div className="flex flex-1 items-center lg:max-w-3xl">
-            <div className="flex-1">            
+            <div className="flex-1">
               <Input
                 size="lg"
                 label="Search Uber Eats"
@@ -82,20 +99,70 @@ const navbar = () => {
       <nav className='fixed w-full bottom-0 z-50 bg-white'>
         <div className='lg:hidden flex flex-wrap justify-between  gap-5 p-3 border-2'>
           <span className='cursor-pointer'>
-            <Home className='w-6 h-6'/>
+            <Home className='w-6 h-6' />
           </span>
           <span className='cursor-pointer'>
-            <Search className='w-6 h-6'/>
+            <Search className='w-6 h-6' />
           </span>
           <span className='cursor-pointer'>
-            <DiamondPlus className='w-7 h-7'/>
+            <DiamondPlus className='w-7 h-7' />
           </span>
           <span className='cursor-pointer'>
-            <ChartColumnStacked className='w-6 h-6'/>
+            <ChartColumnStacked className='w-6 h-6' />
           </span>
-          <span className='cursor-pointer'>
-            <CircleUser className='w-6 h-6'/>
+          <span className='cursor-pointer' onClick={handleOpen}>
+            <CircleUser className='w-6 h-6' />
           </span>
+          <Dialog
+            size="xs"
+            open={dopen}
+            handler={handleOpen}
+            className="bg-transparent shadow-none"
+          >
+            <Card className="mx-auto w-full max-w-[24rem]">
+              <CardBody className="flex flex-col gap-4">
+                <Typography variant="h4" color="blue-gray">
+                  Sign In
+                </Typography>
+                <Typography
+                  className="mb-3 font-normal"
+                  variant="paragraph"
+                  color="gray"
+                >
+                  Enter your email and password to Sign In.
+                </Typography>
+                <Typography className="-mb-2" variant="h6">
+                  Your Email
+                </Typography>
+                <Input label="Email" size="lg" />
+                <Typography className="-mb-2" variant="h6">
+                  Your Password
+                </Typography>
+                <Input label="Password" size="lg" />
+                <div className="-ml-2.5 -mt-3">
+                  <Checkbox label="Remember Me" />
+                </div>
+              </CardBody>
+              <CardFooter className="pt-0">
+                <Button variant="gradient" onClick={handleOpen} fullWidth>
+                  Sign In
+                </Button>
+                <Typography variant="small" className="mt-4 flex justify-center">
+                  Don&apos;t have an account?
+                  <Typography
+                    as="a"
+                    href="#signup"
+                    variant="small"
+                    color="blue-gray"
+                    className="ml-1 font-bold"
+                    onClick={handleOpen}
+                  >
+                    Sign up
+                  </Typography>
+                </Typography>
+              </CardFooter>
+            </Card>
+          </Dialog>
         </div>
       </nav>
 
