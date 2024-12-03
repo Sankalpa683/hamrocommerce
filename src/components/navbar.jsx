@@ -79,7 +79,7 @@ const navbar = () => {
 
       {/* bottom nav  */}
 
-      <nav className='fixed w-full bottom-0'>
+      <nav className='fixed w-full bottom-0 z-50 bg-white'>
         <div className='lg:hidden flex flex-wrap justify-between  gap-5 p-3 border-2'>
           <span className='cursor-pointer'>
             <Home className='w-6 h-6'/>
