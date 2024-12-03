@@ -9,7 +9,7 @@ const hero = () => {
       <section id='hero_section'>
         <div className='py-[30px] lg:pt-[115px] lg:pb-[70px] px-[40px] w-full flex flex-wrap justify-center items-center flex-col'>
           <div className='text-center flex flex-col flex-wrap gap-5' id='main_header'>
-            <h1 className='text-[32px] sm:text-[32px] md:text-[50px] lg:text-6xl text-center tracking-wide'>Discover the modern way<br className='' /> to shop groceries.</h1>
+            <h1 className='text-[31px] sm:text-[32px] md:text-[50px] lg:text-6xl text-center tracking-wide'>Discover the modern way<br className='hidden lg:block' /> to shop grocery.</h1>
             <h2 className='text-sm lg:text-lg text-center'>Explore exceptional products crafted by the most talented developers <br className='hidden lg:block' /> ready to elevate your shopping experience.</h2>
           </div>
           <div className="w-full max-w-2xl mt-8 space-y-4">
