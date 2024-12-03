@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import Hamburgermenu from './menu/menu';
 import { Button, Input } from '@material-tailwind/react';
-import { Menu, MapPinHouse, Search, ShoppingBag } from 'lucide-react';
+import { Home, Menu, MapPinHouse, DiamondPlus, CircleUser, ChartColumnStacked,  Search, ShoppingBag } from 'lucide-react';
 
 
 const navbar = () => {
@@ -30,7 +30,7 @@ const navbar = () => {
                 <img src='https://www.ubereats.com/_static/97c43f8974e6c876.svg' className='w-[90px] h-[16px]' />
               </a>
 
-              <Button variant="text" className="hidden font-medium items-center text- gap-2 lg:flex text-black">
+              <Button variant="text" className="hidden font-medium items-center gap-2 lg:flex text-black">
                 <MapPinHouse className="h-4 w-4 text-black" />
                 <span className=''>Nepal</span>
                 <span className="h-4 w-[1px] bg-gray-300" />
@@ -53,8 +53,8 @@ const navbar = () => {
             </div>
           </div>
           {/* center sections */}
-          <div className="flex flex-1 items-center gap-x-4 lg:max-w-2xl">
-            <div className="relative flex-1">            
+          <div className="flex flex-1 items-center lg:max-w-3xl">
+            <div className="flex-1">            
               <Input
                 size="lg"
                 label="Search Uber Eats"
@@ -74,6 +74,28 @@ const navbar = () => {
             </div>
 
           </div>
+        </div>
+      </nav>
+
+      {/* bottom nav  */}
+
+      <nav className='fixed w-full bottom-0'>
+        <div className='lg:hidden flex flex-wrap justify-between  gap-5 p-3 border-2'>
+          <span className='cursor-pointer'>
+            <Home className='w-6 h-6'/>
+          </span>
+          <span className='cursor-pointer'>
+            <Search className='w-6 h-6'/>
+          </span>
+          <span className='cursor-pointer'>
+            <DiamondPlus className='w-7 h-7'/>
+          </span>
+          <span className='cursor-pointer'>
+            <ChartColumnStacked className='w-6 h-6'/>
+          </span>
+          <span className='cursor-pointer'>
+            <CircleUser className='w-6 h-6'/>
+          </span>
         </div>
       </nav>
 

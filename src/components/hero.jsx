@@ -17,7 +17,7 @@ const hero = () => {
               <div className="relative flex-1">
                 <input
                   placeholder="What item are you looking for?"
-                  className="w-full border outline-none rounded-lg pl-4 pr-10 py-2 h-12"
+                  className="w-full bg-white text-black border outline-none rounded-lg pl-4 pr-10 py-2 h-12"
                 />
                 <button
                   size="icon"
@@ -32,7 +32,7 @@ const hero = () => {
           <div className='w-full max-w-2xl mt-8 space-y-4'>
             <div className='flex flex-wrap gap-3 items-center text-[14px]'>
               <p className='text-[#a8abb2] w-full text-center lg:text-start'>Trending searches: </p>
-              <div className='flex flex-wrap justify-center items-center lg:flex-nowrap gap-3'>
+              <div className='flex flex-wrap cursor-pointer justify-center items-center lg:flex-nowrap gap-3'>
                 <Chip variant="ghost" value="Breakfast" />
                 <Chip variant="ghost" value="Coffee" />
                 <Chip variant="ghost" value="Pizza" />
