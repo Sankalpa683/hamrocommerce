@@ -13,11 +13,13 @@ import {
 import { Menu } from 'lucide-react';
 
 
-export default function Hamburgermenu() {
+function Hamburgermenu() {
     const [open, setOpen] = React.useState(false);
 
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
+
+
 
     return (
         <>
@@ -154,3 +156,5 @@ export default function Hamburgermenu() {
         </>
     );
 }
+
+export default Hamburgermenu

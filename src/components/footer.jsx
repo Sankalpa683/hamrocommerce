@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 
+
 export default function footer() {
     return (
         <footer className="bg-white text-[#0a1929] py-12 px-4">

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Navbar from './components/navbar'
 import Hero from './components/hero';
 import Products from './components/products';
@@ -6,6 +8,7 @@ import './App.css'
 import "./index.css";
 
 function App() {
+
 
   return (
     <>
@@ -17,6 +20,8 @@ function App() {
         <br />
         <hr />
         <Footer />
+        <br />
+
         <br />
       </main>
     </>

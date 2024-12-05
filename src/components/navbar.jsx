@@ -27,6 +27,7 @@ const navbar = () => {
 
   const [dopen, setdopen] = useState(false);
   const handleOpen = () => setdopen((cur) => !cur);
+  
 
   return (
     <>
@@ -34,8 +35,8 @@ const navbar = () => {
       <nav className='sticky top-0 z-50 flex w-full items-center border-b bg-white p-4 md:px-6'>
         <div className="flex w-full items-center justify-around gap-x-4 lg:gap-x-6">
           {/* left sections */}
-          <div className="flex items-center gap-x-4 lg:gap-x-6">
-            <div className="flex items-center gap-x-2 lg:gap-x-3">
+          <div className="flex items-center">
+            <div className="flex items-center gap-x-2 lg:gap-x-1">
               <Hamburgermenu />
               {/* <Button variant="text" className='p-2' size="icon" onClick={openDrawer}>
                 <Menu className="h-5 w-5" />
