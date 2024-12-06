@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import Hamburgermenu from './menu/menu';
-
+import { useNavigate } from 'react-router';
 import { Button, Input } from '@material-tailwind/react';
 import {
   Dialog,
@@ -18,6 +18,11 @@ const navbar = () => {
 
   // use state hook for drawer (menu hamburger navigation)
 
+  const [uservalue, setUservalue] = useState('');
+  const navigate = useNavigate(); // React Router hook for navigation
+
+  console.log(uservalue);
+
   const [open, setOpen] = useState(false);
 
   const openDrawer = () => setOpen(true);
@@ -27,7 +32,17 @@ const navbar = () => {
 
   const [dopen, setdopen] = useState(false);
   const handleOpen = () => setdopen((cur) => !cur);
-  
+
+  // redirecting users when he clicks on nav section 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Prevent form submission or unwanted behavior
+      if (uservalue.trim()) {
+        navigate(`/search?query=${encodeURIComponent(uservalue)}`); // Redirect to search page with the query
+      }
+    }
+  };
+
 
   return (
     <>
@@ -76,6 +91,10 @@ const navbar = () => {
               <Input
                 size="lg"
                 label="Search Uber Eats"
+                value={uservalue}
+                onChange={(e) => setUservalue(e.target.value)} // Update query state on typing
+                onKeyDown={handleKeyDown} // Listen for the Enter key
+                placeholder="Search for products..."
               />
             </div>
           </div>

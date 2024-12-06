@@ -84,7 +84,7 @@ const products = () => {
     })
 
     const handleShowMoreClick = () => {
-        setCurrentvalue(currentvalue => currentvalue + 4); // Increment by 2 when the button is clicked
+        setCurrentvalue(currentvalue == currentvalue + 4); // Increment by 2 when the button is clicked
     };
 
 
