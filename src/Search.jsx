@@ -6,12 +6,17 @@ import axios from 'axios';
 import { Spinner } from "@material-tailwind/react";
 import { Star } from 'lucide-react';
 import { Button } from '@material-tailwind/react';
+import Footer from './components/footer';
 
 function SearchPage() {
-  const location = useLocation(); // Get the current URL
+  const location = useLocation(); // current URL thaha pauna
   const searchQuery = new URLSearchParams(location.search).get('query');
 
+
   function Searchsection({ value }) {
+
+    // calling the fetchdata function to further pass it on query function of use query tanstack router
+
     const fetchdata = () => {
       return axios.get(`https://fakestoreapi.com/products`);
     };
@@ -21,6 +26,10 @@ function SearchPage() {
       queryFn: fetchdata,
       keepPreviousData: true,
     });
+
+
+    
+
 
     if (isLoading) {
       return (
@@ -36,11 +45,11 @@ function SearchPage() {
     }
 
     if (isError) {
-      return <div>The application encountered an error: {error.message}</div>;
+      return <div>The application encountered an error: {error}</div>;
     }
 
-    // Filter the products based on the search query
-    const filteredProducts = data?.data.filter((product) =>
+    // Filtering the product based on what user typed
+    const filteredProducts = data.data.filter((product) =>
       product.title.toLowerCase().includes(value.toLowerCase())
     );
 
@@ -100,8 +109,13 @@ function SearchPage() {
       {searchQuery ? (
         <Searchsection value={searchQuery} />
       ) : (
-        <p className="text-center mt-10">No search query provided.</p>
+        <div>
+          <Navbar />
+          <br />
+          <p className="text-center mt-10">No search query provided.</p>
+        </div>
       )}
+      <Footer />
     </div>
   );
 }

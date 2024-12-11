@@ -2,52 +2,31 @@ import { useState, useEffect } from 'react';
 import { Input, Button, Chip } from '@material-tailwind/react'
 import { Search } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-const suggestions = [
-  "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-  "Mens Casual Premium Slim Fit T-Shirts",
-  "Mens Cotton Jacket",
-  "Mens Casual Slim Fit",
-  "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-  "Solid Gold Petite Micropave",
-  "White Gold Plated Princess",
-  "Pierced Owl Rose Gold Plated Stainless Steel Double",
-  "WD 2TB Elements Portable External Hard Drive - USB 3.0",
-  "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
-  "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
-  "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
-  "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
-  "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED",
-  "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
-  "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
-  "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
-  "MBJ Women's Solid Short Sleeve Boat Neck V"
-];
-
+import { useNavigate } from 'react-router';
 
 const hero = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    if (value.trim()) {
-      setFilteredSuggestions(
-        suggestions.filter((item) =>
-          item.toLowerCase().includes(value.toLowerCase())
-        )
-      );
-      setShowSuggestions(true);
-    } else {
-      setShowSuggestions(false);
+  // taking user to the search page
+
+  const navigation = useNavigate();
+  const [searchvalue, setSearchvalue] = useState('');
+
+
+  const handleSearch = (e) => {
+    setSearchvalue(e.target.value);
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key == "Enter") {
+      e.preventDefault(); // Prevent form submission or unwanted behavior
+
+      if (searchvalue.trim()) {
+        navigation(`/search?query=${encodeURIComponent(searchvalue)}`); // Redirect to search page with the query
+      }
     }
-  };
+  }
 
-  const handleSuggestionClick = (suggestion) => {
-    setInputValue(suggestion);
-    setShowSuggestions(false);
-  };
+
   return (
     <>
       <section id='hero_section'>
@@ -63,8 +42,9 @@ const hero = () => {
                   <div className="relative flex-1">
                     <input
                       type="text"
-                      value={inputValue}
-                      onChange={handleInputChange}
+                      value={searchvalue}
+                      onChange={handleSearch}
+                      onKeyDown={handleKeyDown}
                       placeholder="What item are you looking for?"
                       className="w-full bg-white text-black border outline-none rounded-lg pl-4 pr-10 py-2 h-12"
                     />
@@ -75,19 +55,7 @@ const hero = () => {
                     >
                       <Search className="h-5 w-5 text-muted-foreground" />
                     </button>
-                    {showSuggestions && filteredSuggestions.length > 0 && (
-                      <ul className="absolute z-10 left-0 w-full bg-white border rounded-lg shadow-md mt-1">
-                        {filteredSuggestions.map((item, index) => (
-                          <li
-                            key={index}
-                            className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer"
-                            onClick={() => handleSuggestionClick(item)}
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+
                   </div>
                 </div>
               </div>

@@ -3,70 +3,12 @@ import Select from 'react-select'
 import { ChevronDown, Star, Plus } from 'lucide-react'
 import { Button } from '@material-tailwind/react'
 import { useQuery } from '@tanstack/react-query'
+import { Rating } from "@material-tailwind/react";
 import axios from 'axios'
 import { Spinner } from "@material-tailwind/react";
 
-
-// const fetchProducts = async () => {
-//     const data = await axios.get('https://fakestoreapi.com/products');
-//     return data;
-// };
-// fetchProducts();
-
-const designs = [
-    {
-        id: 1,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 2,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 3,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 4,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 5,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 6,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 7,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-    {
-        id: 8,
-        name: 'Magaritto Pizza',
-        price: '239',
-        desc: "Always the party can't start without pizza.",
-    },
-]
-
 const options = [
     { value: 'Popular', label: 'Popular' },
-    { value: 'Relavant', label: 'Relavant' },
 ]
 
 const products = () => {
@@ -75,16 +17,19 @@ const products = () => {
         return axios.get(`https://fakestoreapi.com/products?limit=${dyanamicvalue}`)
     }
 
-    const [currentvalue, setCurrentvalue] = useState(4);
+    let [currentvalue, setCurrentvalue] = useState(4);
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ['products'],
         queryFn: () => fetchdata(currentvalue),
-        keepPreviousData : true,
+        keepPreviousData: true,
     })
 
     const handleShowMoreClick = () => {
-        setCurrentvalue(currentvalue == currentvalue + 4); // Increment by 2 when the button is clicked
+        setCurrentvalue(8); // Increment by current value by 4 when the button is clicked
+
+        console.log(currentvalue);
+
     };
 
 
@@ -98,6 +43,23 @@ const products = () => {
 
     }
     console.log(data);
+
+    // working on add to cart button
+
+    function addtocart(productimg, productName, productPrice) {
+        const newItem = { img: productimg, name: productName, price: productPrice };
+
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const itemExists = existingCart.some((item) => item.img === productimg);
+
+        if (!itemExists) {
+            const updatedCart = [...existingCart, newItem];
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+        } else {
+            alert(`This product has already already in the cart!`);
+        }
+    }
 
 
     return (
@@ -121,7 +83,7 @@ const products = () => {
                                         <img className='object-cover w-[300px] h-[180px]' src={item.image} />
                                     </div>
                                     <div className='mx-2'>
-                                        <div className='w-full text-lg flex justify-between items-center'>
+                                        <div className='w-full text-lg flex flex-wrap lg:flex-nowrap gap-2 justify-between items-center'>
                                             <h1 className='font-medium'>{item.title}</h1>
                                             <p className='font-bold'>
                                                 ${item.price}.00
@@ -131,15 +93,19 @@ const products = () => {
                                             <p className='text-[14px] capitalize text-gray-600'>{item.description}</p>
                                         </div>
                                         <div className='flex flex-wrap mt-4 gap-1 items-center'>
+                                            <Rating value={4} />
+
+                                            {/* <Star className='w-4 text-yellow-700' />
                                             <Star className='w-4 text-yellow-700' />
                                             <Star className='w-4 text-yellow-700' />
                                             <Star className='w-4 text-yellow-700' />
-                                            <Star className='w-4 text-yellow-700' />
-                                            <Star className='w-4 text-yellow-700' />
-                                            <span className='font-medium text-[13px] ml-1'>(5 stars)</span>
+                                            <Star className='w-4 text-yellow-700' />*/}
+                                            <span className='font-medium text-[17px] ml-1'>(4 stars)</span>
                                         </div>
                                         <div className='my-6 w-full items-end'>
-                                            <Button variant="text" className='bg-gray-900/10 w-full'>Add to cart</Button>
+                                            {/* {existingCart ? <p>helloworld</p> : <p>garena yar</p>} */}
+
+                                            <Button variant="text" className='bg-gray-900/10 w-full' onClick={() => addtocart(item.image, item.title, item.price)}>Add to cart</Button>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +116,7 @@ const products = () => {
 
                     </div>
                     <div className='flex mt-6 w-full justify-center items-center'>
-                        <Button className='flex gap-2 items-center' disabled={isLoading} onClick={handleShowMoreClick}> <Plus /> Show More</Button>
+                        <Button className='flex gap-2 items-center' onClick={handleShowMoreClick}> <Plus /> Show More</Button>
                     </div>
                 </div>
             </section>

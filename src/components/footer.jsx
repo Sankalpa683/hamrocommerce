@@ -6,9 +6,9 @@ export default function footer() {
         <footer className="bg-white text-[#0a1929] py-12 px-4">
             <div className="container mx-auto max-w-7xl">
                 <div className="bg-white text-black py-12 ">
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {/* Logo and App Store Links */}
-                        <div className="col-span-3 md:col-span-4 lg:col-span-4 xl:col-span-5 flex flex-col items-start justify-center">
+                        <div className="col-span-2 md:col-span-4 lg:col-span-4 xl:col-span-5 flex flex-col items-start justify-center">
                             <div className="mb-4">
                                 <img
                                     src="https://www.ubereats.com/_static/97c43f8974e6c876.svg"

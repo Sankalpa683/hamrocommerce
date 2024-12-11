@@ -5,8 +5,12 @@ import { Button, Input } from '@material-tailwind/react';
 import {
   Dialog,
   Card,
-  CardHeader,
   CardBody,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  List,
+  ListItem,
   CardFooter,
   Typography,
   Checkbox,
@@ -16,7 +20,6 @@ import { Home, Menu, MapPinHouse, DiamondPlus, CircleUser, ChartColumnStacked, S
 
 const navbar = () => {
 
-  // use state hook for drawer (menu hamburger navigation)
 
   const [uservalue, setUservalue] = useState('');
   const navigate = useNavigate(); // React Router hook for navigation
@@ -24,6 +27,9 @@ const navbar = () => {
   console.log(uservalue);
 
   const [open, setOpen] = useState(false);
+
+  // use state hook for drawer (menu hamburger navigation)
+
 
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
@@ -43,6 +49,24 @@ const navbar = () => {
     }
   };
 
+  const Shoppingcard = () => {
+
+    return (
+      <>
+
+        <ListItem>
+          <div className='flex gap-8'>
+            <img src='https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg' className='w-[120px] rounded-xl' />
+            <div className='flex flex-col gap-2'>
+              <h1 className='text-xl'>Mens Cotton Jacket</h1>
+              <p className='font-bold'>$55.99</p>
+            </div>
+          </div>
+        </ListItem>
+      </>
+    )
+  }
+
 
   return (
     <>
@@ -53,10 +77,7 @@ const navbar = () => {
           <div className="flex items-center">
             <div className="flex items-center gap-x-2 lg:gap-x-1">
               <Hamburgermenu />
-              {/* <Button variant="text" className='p-2' size="icon" onClick={openDrawer}>
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button> */}
+
 
 
               <a href="/" className="hidden lg:flex">
@@ -100,11 +121,21 @@ const navbar = () => {
           </div>
           {/* right sections */}
           <div className="flex items-center gap-x-4 lg:gap-x-6">
-            <Button variant="text" size="icon" className="relative">
-              <ShoppingBag className="h-5 w-5 text-black" />
+            <Popover>
+              <PopoverHandler>
+                <Button variant="text" size="icon" className="relative">
+                  <ShoppingBag className="h-5 w-5 text-black" />
+                  <span className="sr-only">Shopping cart</span>
+                </Button>
+              </PopoverHandler>
+              <PopoverContent className='mt-4'>
+                <List>
 
-              <span className="sr-only">Shopping cart</span>
-            </Button>
+                  <Shoppingcard />
+
+                </List>
+              </PopoverContent>
+            </Popover>
             <div className="hidden lg:flex lg:items-center lg:gap-x-2">
               <Button variant="ghost" className='py-[10px] px-[20px] bg-black text-white'>Log in</Button>
               <Button variant="text" className='py-[10px] px-[20px] text-black bg-[#f3f3f1] '>Sign up</Button>
@@ -119,7 +150,7 @@ const navbar = () => {
       <nav className='fixed w-full bottom-0 z-50 bg-white'>
         <div className='lg:hidden flex flex-wrap justify-between  gap-5 p-3 border-2'>
           <span className='cursor-pointer'>
-            <Home className='w-6 h-6' />
+            <a href='/'><Home className='w-6 h-6' /></a>
           </span>
           <span className='cursor-pointer'>
             <Search className='w-6 h-6' />
