@@ -51,12 +51,11 @@ const products = () => {
     function addtocart(productimg, productName, productPrice) {
         const newItem = { img: productimg, name: productName, price: productPrice };
 
-        const existingCart = JSON.parse(localStorage.getItem("cart"));
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
+        console.log(existingCart)
 
         const itemExists = existingCart.some((item) => item.img === productimg);
-
-
 
         if (!itemExists) {
             const updatedCart = [...existingCart, newItem];
@@ -88,7 +87,7 @@ const products = () => {
                     <div className='gap-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center lg:justify-between'>
                         {data?.data.map((item, index) =>
                             <>
-                                <div key={index} className="space-y-5 shadow h-fit rounded-lg">
+                                <div key={item} className="space-y-5 shadow h-fit rounded-lg">
                                     <div className='w-full rounded-lg bg-[#f5f7f6] pt-3'>
                                         <img className='object-cover w-[300px] h-[180px]' src={item.image} />
                                     </div>
