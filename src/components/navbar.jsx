@@ -51,6 +51,9 @@ const navbar = () => {
     }
   };
 
+
+
+
   // delete cart 
   const cartdelete = () => {
     console.log('clicked');
@@ -59,30 +62,51 @@ const navbar = () => {
     });
   }
 
+  // get carts 
+  const storedCart = JSON.parse(localStorage.getItem("cart"));
+
+  if (storedCart == null) {
+    console.log("cart ma kai product xaina");
+  }
+  else {
+    console.log(storedCart);
+
+  }
+
   const Shoppingcard = () => {
+
+
 
     return (
       <>
+        {storedCart == null ? (
+          <p>You haven't added any products to the cart yet!</p>
+        ) : (
 
-        <ListItem>
-          <div>
-            <div className='flex gap-6 items-center p-1 rounded-lg'>
-              <img src='https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg' className='w-[120px] rounded-xl' />
-              <div className='flex flex-1 flex-col gap-2'>
-                <h1 className='text-xl'>Mens Cotton Jacket</h1>
-                <p className='font-bold'>$55.99</p>
-                <div className='flex gap-5 justify-between mt-2 items-center'>
-                  <Rating value={4} />
-                  <button className='text-red-500 hover:text-red-700 transition' onClick={cartdelete}>
-                    <Trash2 className='text-xl' />
-                    <ToastContainer />
-                  </button>
+          <div className='h-[550px] overflow-y-scroll'>
+            {storedCart.map((item, index) => (
+              <ListItem key={index}>
+                <div>
+                  <div className='flex gap-6 w-full flex-wrap lg:[400px] items-center p-1 rounded-lg'>
+                    <img src={item.img} className='w-[120px] rounded-xl' />
+                    <div className='flex flex-1 flex-col gap-2'>
+                      <h1 className='text-xl break-all'>{item.name}</h1>
+                      <p className='font-bold'>${item.price}</p>
+                      <div className='flex gap-4 mt-2 items-center'>
+                        <Rating value={4} />
+                        <button className='text-red-500 hover:text-red-700 transition' onClick={cartdelete}>
+                          <Trash2 className='text-xl' />
+                          <ToastContainer />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </ListItem>
+            ))}
           </div>
 
-        </ListItem>
+        )}
       </>
     )
   }
