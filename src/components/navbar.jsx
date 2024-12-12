@@ -54,13 +54,7 @@ const navbar = () => {
 
 
 
-  // delete cart 
-  const cartdelete = () => {
-    console.log('clicked');
-    toast.success("Successfully Removed!", {
-      position: "bottom-right"
-    });
-  }
+  
 
   // get carts 
   const storedCart = JSON.parse(localStorage.getItem("cart"));
@@ -73,6 +67,8 @@ const navbar = () => {
 
   }
 
+
+
   const Shoppingcard = () => {
 
 
@@ -83,7 +79,7 @@ const navbar = () => {
           <p>You haven't added any products to the cart yet!</p>
         ) : (
 
-          <div className='h-[390px] lg:[550px] overflow-y-scroll'>
+          <div className='h-[390px] lg:h-[480px] overflow-y-scroll'>
             {storedCart.map((item, index) => (
               <ListItem key={index}>
                 <div>
@@ -94,16 +90,15 @@ const navbar = () => {
                       <p className='font-bold'>${item.price}</p>
                       <div className='flex gap-4 mt-2 items-center'>
                         <Rating value={4} />
-                        <button className='text-red-500 hover:text-red-700 transition' onClick={cartdelete}>
-                          <Trash2 className='text-xl' />
-                          <ToastContainer />
-                        </button>
+                        
                       </div>
                     </div>
                   </div>
                 </div>
               </ListItem>
+              
             ))}
+
           </div>
 
         )}
