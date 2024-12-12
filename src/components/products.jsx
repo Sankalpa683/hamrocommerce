@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 import { Rating } from "@material-tailwind/react";
 import axios from 'axios'
 import { Spinner } from "@material-tailwind/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const options = [
     { value: 'Popular', label: 'Popular' },
@@ -57,7 +59,9 @@ const products = () => {
             const updatedCart = [...existingCart, newItem];
             localStorage.setItem("cart", JSON.stringify(updatedCart));
         } else {
-            alert(`This product has already already in the cart!`);
+            toast.warn("This items has already been added to your cart", {
+                position: "bottom-right"
+            });
         }
     }
 
@@ -103,9 +107,9 @@ const products = () => {
                                             <span className='font-medium text-[17px] ml-1'>(4 stars)</span>
                                         </div>
                                         <div className='my-6 w-full items-end'>
-                                            {/* {existingCart ? <p>helloworld</p> : <p>garena yar</p>} */}
-
                                             <Button variant="text" className='bg-gray-900/10 w-full' onClick={() => addtocart(item.image, item.title, item.price)}>Add to cart</Button>
+                                            <ToastContainer />
+
                                         </div>
                                     </div>
                                 </div>

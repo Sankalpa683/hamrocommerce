@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import Hamburgermenu from './menu/menu';
 import { useNavigate } from 'react-router';
-import { Button, Input } from '@material-tailwind/react';
+import { Button, Input, Rating } from '@material-tailwind/react';
 import {
   Dialog,
   Card,
@@ -15,7 +15,9 @@ import {
   Typography,
   Checkbox,
 } from "@material-tailwind/react";
-import { Home, Menu, MapPinHouse, DiamondPlus, CircleUser, ChartColumnStacked, Search, ShoppingBag } from 'lucide-react';
+import { Home, Menu, MapPinHouse, DiamondPlus, CircleUser, ChartColumnStacked, Search, ShoppingBag, Trash2 } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const navbar = () => {
@@ -49,19 +51,37 @@ const navbar = () => {
     }
   };
 
+  // delete cart 
+  const cartdelete = () => {
+    console.log('clicked');
+    toast.success("Successfully Removed!", {
+      position: "bottom-right"
+    });
+  }
+
   const Shoppingcard = () => {
 
     return (
       <>
 
         <ListItem>
-          <div className='flex gap-8'>
-            <img src='https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg' className='w-[120px] rounded-xl' />
-            <div className='flex flex-col gap-2'>
-              <h1 className='text-xl'>Mens Cotton Jacket</h1>
-              <p className='font-bold'>$55.99</p>
+          <div>
+            <div className='flex gap-6 items-center p-1 rounded-lg'>
+              <img src='https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg' className='w-[120px] rounded-xl' />
+              <div className='flex flex-1 flex-col gap-2'>
+                <h1 className='text-xl'>Mens Cotton Jacket</h1>
+                <p className='font-bold'>$55.99</p>
+                <div className='flex gap-5 justify-between mt-2 items-center'>
+                  <Rating value={4} />
+                  <button className='text-red-500 hover:text-red-700 transition' onClick={cartdelete}>
+                    <Trash2 className='text-xl' />
+                    <ToastContainer />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+
         </ListItem>
       </>
     )
