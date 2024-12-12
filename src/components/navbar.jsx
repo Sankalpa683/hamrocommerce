@@ -83,7 +83,7 @@ const navbar = () => {
           <p>You haven't added any products to the cart yet!</p>
         ) : (
 
-          <div className='h-[550px] overflow-y-scroll'>
+          <div className='h-[390px] lg:[550px] overflow-y-scroll'>
             {storedCart.map((item, index) => (
               <ListItem key={index}>
                 <div>
